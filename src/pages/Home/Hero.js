@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <section className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img
           src="https://www.nicepng.com/png/detail/145-1452311_construction-tools-png-hardware-store.png"
@@ -15,7 +15,7 @@ const Hero = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
