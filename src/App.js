@@ -17,6 +17,7 @@ import AllOrders from "./pages/AllOrders/AllOrders";
 import AllProducts from "./pages/AllProducts/AllProducts";
 import Members from "./pages/Members/Members";
 import AddProducts from "./pages/AddProducts/AddProducts";
+import SingleBlog from "./pages/SingleBlog/SingleBlog";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blogs/:id" element={<SingleBlog />} />
         <Route path="/dashboard" element={<SideBar />}>
           <Route index element={<Dashboard />} />
           <Route path="myorders" element={<MyOrders />} />
