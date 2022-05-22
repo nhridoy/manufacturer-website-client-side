@@ -6,7 +6,7 @@ const Hero = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img
           src="https://www.nicepng.com/png/detail/145-1452311_construction-tools-png-hardware-store.png"
-          className="max-w-sm h-80 object-cover rounded-lg shadow-2xl"
+          className="w-sm h-80 object-cover rounded-lg shadow-2xl"
         />
         <div>
           <h1 className="text-5xl font-bold">ToolKit</h1>
