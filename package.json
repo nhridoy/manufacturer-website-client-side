@@ -17,6 +17,7 @@
     "react-query": "^3.39.0",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "use-count-up": "^3.0.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {

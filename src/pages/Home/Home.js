@@ -1,4 +1,6 @@
 import React from "react";
+import ClientFeedback from "./ClientFeedback";
+import Counter from "./Counter";
 import Hero from "./Hero";
 import Tools from "./Tools";
 import ToolsSection from "./ToolsSection";
@@ -11,6 +13,8 @@ const Home = () => {
       <Tools />
       <ToolsSection />
       <VideoSection />
+      <Counter />
+      <ClientFeedback />
     </main>
   );
 };
