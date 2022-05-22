@@ -40,6 +40,9 @@ const Header = () => {
           <li>
             <Link to="blogs">Blogs</Link>
           </li>
+          <li>
+            <Link to="myportfolio">My Portfolio</Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
