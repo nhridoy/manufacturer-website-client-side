@@ -18,6 +18,8 @@ import AllProducts from "./pages/AllProducts/AllProducts";
 import Members from "./pages/Members/Members";
 import AddProducts from "./pages/AddProducts/AddProducts";
 import SingleBlog from "./pages/SingleBlog/SingleBlog";
+import AdminBlogs from "./pages/AdminBlogs/AdminBlogs";
+import NewBlog from "./pages/NewBlog/NewBlog";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
           <Route path="addproducts" element={<AddProducts />} />
           <Route path="allproducts" element={<AllProducts />} />
           <Route path="members" element={<Members />} />
+          <Route path="blogs" element={<AdminBlogs />} />
+          <Route path="blogs/new" element={<NewBlog />} />
         </Route>
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/myprofile" element={<Blogs />} />
