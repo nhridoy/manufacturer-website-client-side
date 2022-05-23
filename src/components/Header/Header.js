@@ -1,7 +1,11 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Header = () => {
+  const [user, loading, error] = useAuthState(auth);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -46,38 +50,42 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <div className="dropdown dropdown-end">
-          <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="https://api.lorem.space/image/face?hash=33791" />
-            </div>
-          </label>
-          <ul
-            tabIndex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src="https://api.lorem.space/image/face?hash=33791" />
+              </div>
+            </label>
+            <ul
+              tabIndex="0"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="myprofile" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <span onClick={() => signOut(auth)}>Logout</span>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <ul className="menu menu-horizontal p-0">
             <li>
-              <Link to="myprofile" className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </Link>
+              <NavLink to="/login">Login</NavLink>
             </li>
             <li>
-              <Link to="dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <a>Logout</a>
+              <NavLink to="/register">Register</NavLink>
             </li>
           </ul>
-        </div>
-        <ul className="menu menu-horizontal p-0">
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/register">Register</NavLink>
-          </li>
-        </ul>
+        )}
+
         <label
           htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden"

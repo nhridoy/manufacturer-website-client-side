@@ -20,6 +20,7 @@ import AddProducts from "./pages/AddProducts/AddProducts";
 import SingleBlog from "./pages/SingleBlog/SingleBlog";
 import AdminBlogs from "./pages/AdminBlogs/AdminBlogs";
 import NewBlog from "./pages/NewBlog/NewBlog";
+import Purchase from "./pages/Purchase/Purchase";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/:id" element={<Purchase />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/blogs" element={<Blogs />} />
@@ -43,7 +45,6 @@ function App() {
           <Route path="blogs/new" element={<NewBlog />} />
         </Route>
         <Route path="/myprofile" element={<MyProfile />} />
-        <Route path="/myprofile" element={<Blogs />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
