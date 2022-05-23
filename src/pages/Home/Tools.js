@@ -14,9 +14,9 @@ const Tools = () => {
         <Tool />
         <Tool />
       </div>
-      <Link to="all" className="btn btn-primary btn-sm my-5">
+      {/* <Link to="all" className="btn btn-primary btn-sm my-5">
         All Items
-      </Link>
+      </Link> */}
     </section>
   );
 };
