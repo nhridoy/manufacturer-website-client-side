@@ -25,6 +25,7 @@ import MyPortfolio from "./pages/MyPortfolio/MyPortfolio";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 function App() {
   return (
@@ -32,15 +33,36 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/:id" element={<Purchase />} />
+        <Route
+          path="/:id"
+          element={
+            <RequireAuth>
+              <Purchase />
+            </RequireAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<SingleBlog />} />
         <Route path="/dashboard" element={<SideBar />}>
           <Route index element={<Dashboard />} />
-          <Route path="myorders" element={<MyOrders />} />
-          <Route path="addreview" element={<CreateReview />} />
+          <Route
+            path="myorders"
+            element={
+              <RequireAuth>
+                <MyOrders />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="addreview"
+            element={
+              <RequireAuth>
+                <CreateReview />
+              </RequireAuth>
+            }
+          />
           <Route path="allorders" element={<AllOrders />} />
           <Route path="addproducts" element={<AddProducts />} />
           <Route path="allproducts" element={<AllProducts />} />
@@ -48,7 +70,14 @@ function App() {
           <Route path="blogs" element={<AdminBlogs />} />
           <Route path="blogs/new" element={<NewBlog />} />
         </Route>
-        <Route path="/myprofile" element={<MyProfile />} />
+        <Route
+          path="/myprofile"
+          element={
+            <RequireAuth>
+              <MyProfile />
+            </RequireAuth>
+          }
+        />
         <Route path="/myportfolio" element={<MyPortfolio />} />
         <Route path="/reset-password" element={<ForgetPassword />} />
         <Route path="*" element={<NotFound />} />
