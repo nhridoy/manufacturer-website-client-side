@@ -26,6 +26,7 @@ import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
+import Payment from "./pages/Payment/Payment";
 
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
           element={
             <RequireAuth>
               <Purchase />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/payment/:id"
+          element={
+            <RequireAuth>
+              <Payment />
             </RequireAuth>
           }
         />
