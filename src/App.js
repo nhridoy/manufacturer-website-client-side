@@ -21,6 +21,10 @@ import SingleBlog from "./pages/SingleBlog/SingleBlog";
 import AdminBlogs from "./pages/AdminBlogs/AdminBlogs";
 import NewBlog from "./pages/NewBlog/NewBlog";
 import Purchase from "./pages/Purchase/Purchase";
+import MyPortfolio from "./pages/MyPortfolio/MyPortfolio";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   return (
@@ -45,9 +49,12 @@ function App() {
           <Route path="blogs/new" element={<NewBlog />} />
         </Route>
         <Route path="/myprofile" element={<MyProfile />} />
+        <Route path="/myportfolio" element={<MyPortfolio />} />
+        <Route path="/reset-password" element={<ForgetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }
