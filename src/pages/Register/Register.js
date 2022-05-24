@@ -8,6 +8,8 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
+import useUser from "../../hooks/useUser";
+import jwtToken from "../../utils/jwtToken";
 
 const Register = () => {
   const [user] = useAuthState(auth);
@@ -16,6 +18,8 @@ const Register = () => {
   const [updateProfile, updating] = useUpdateProfile(auth);
   const navigate = useNavigate();
   let location = useLocation();
+
+  const [token] = useUser(user);
 
   const [passwordError, setPasswordError] = React.useState("");
 
@@ -28,7 +32,7 @@ const Register = () => {
   let from = location.state?.from?.pathname || "/";
   if (user) {
     navigate(from, { replace: true });
-    // jwtToken(user.email);
+    jwtToken(user.email);
   }
   const onSubmit = async (data) => {
     setPasswordError(null);
@@ -125,7 +129,7 @@ const Register = () => {
               </button>
             </div>
           </form>
-          <div class="divider">OR</div>
+          <div className="divider">OR</div>
           <GoogleLogin />
         </div>
       </div>

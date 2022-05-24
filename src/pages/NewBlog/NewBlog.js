@@ -31,7 +31,7 @@ const NewBlog = () => {
             <span className="label-text">Title?</span>
           </label>
           <textarea
-            class="textarea textarea-bordered h-24"
+            className="textarea textarea-bordered h-24"
             placeholder="Bio"
           ></textarea>
           <label className="label">

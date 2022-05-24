@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import jwtToken from "../../utils/jwtToken";
+import useUser from "../../hooks/useUser";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [token] = useUser(user);
 
   let from = location.state?.from?.pathname || "/";
   if (user) {
@@ -97,7 +100,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <div class="divider">OR</div>
+          <div className="divider">OR</div>
           <GoogleLogin />
         </div>
       </div>
