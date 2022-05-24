@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
 import {
@@ -30,10 +30,12 @@ const Register = () => {
   } = useForm();
 
   let from = location.state?.from?.pathname || "/";
-  if (user) {
-    navigate(from, { replace: true });
-    jwtToken(user.email);
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+      jwtToken(user.email);
+    }
+  }, [user, navigate, from, jwtToken]);
   const onSubmit = async (data) => {
     setPasswordError(null);
     if (data.password !== data.confirmPassword) {

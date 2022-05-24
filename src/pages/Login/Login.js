@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GoogleLogin from "../../components/GoogleLogin/GoogleLogin";
 import {
   useAuthState,
@@ -26,9 +26,11 @@ const Login = () => {
   const [token] = useUser(user);
 
   let from = location.state?.from?.pathname || "/";
-  if (user) {
-    navigate(from, { replace: true });
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, navigate, from]);
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
