@@ -26,9 +26,9 @@ const Members = () => {
           <tbody>
             {members.map((member) => (
               <tr key={member._id}>
-                <td>{member?.name}</td>
+                <td>{member?.name || "John Doe"}</td>
                 <td>{member?.email}</td>
-                <td>{member?.role}</td>
+                <td>{member?.role || "Member"}</td>
                 <td>
                   <button
                     className="btn btn-primary"

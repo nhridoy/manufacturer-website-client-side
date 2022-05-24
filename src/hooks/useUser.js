@@ -5,11 +5,11 @@ const useUser = (user) => {
   const [token, setToken] = React.useState("");
   React.useEffect(() => {
     console.log(user);
-    const email = user?.email;
-    if (email) {
+    if (user) {
       interceptors
         .put("/user", {
-          email,
+          name: user?.displayName,
+          email: user?.email,
         })
         .then((res) => {
           // setToken(res.data.token);
