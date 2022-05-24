@@ -8,6 +8,9 @@ const jwtToken = (email) => {
     })
     .then((res) => {
       localStorage.setItem("token", res.data.token);
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 

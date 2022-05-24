@@ -3,7 +3,7 @@ import { signOut } from "firebase/auth";
 import auth from "../firebase.init";
 
 const interceptors = axios.create({
-  baseURL: "http://llocalhost:5000",
+  baseURL: "http://localhost:5000",
 });
 
 // Add a request interceptor

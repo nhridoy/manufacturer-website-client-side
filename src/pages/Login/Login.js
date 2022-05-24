@@ -7,6 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 import auth from "../../firebase.init";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import jwtToken from "../../utils/jwtToken";
 
 const Login = () => {
   const navigate = useNavigate();
