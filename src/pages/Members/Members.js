@@ -1,6 +1,13 @@
 import React from "react";
+import interceptors from "../../utils/interceptors";
 
 const Members = () => {
+  const [members, setMembers] = React.useState([]);
+  React.useEffect(() => {
+    interceptors.get("/users").then((res) => {
+      setMembers(res.data);
+    });
+  }, []);
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -17,22 +24,23 @@ const Members = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Name</td>
-              <td>email</td>
-              <td>Admin</td>
-              <td>
-                <button className="btn btn-primary">Make Admin</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Name</td>
-              <td>email</td>
-              <td>Admin</td>
-              <td>
-                <button className="btn btn-primary">Make Admin</button>
-              </td>
-            </tr>
+            {members.map((member) => (
+              <tr key={member._id}>
+                <td>{member?.name}</td>
+                <td>{member?.email}</td>
+                <td>{member?.role}</td>
+                <td>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                      console.log(member);
+                    }}
+                  >
+                    Make Admin
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
