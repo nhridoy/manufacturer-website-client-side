@@ -1,11 +1,15 @@
 import React from "react";
 import { useQuery } from "react-query";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import interceptors from "../../utils/interceptors";
 
 const AllProducts = () => {
-  const { data: products, isLoading } = useQuery("products", () =>
-    interceptors.get("/products")
-  );
+  const [product, setProduct] = React.useState(null);
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useQuery("products", () => interceptors.get("/products"));
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -41,13 +45,20 @@ const AllProducts = () => {
                 <td>{product.price}</td>
                 <td>{product.quantity}</td>
                 <td>
-                  <button className="btn btn-primary">Delete</button>
+                  <label
+                    onClick={() => setProduct(product)}
+                    htmlFor="delete-modal"
+                    className="btn btn-primary modal-button"
+                  >
+                    Delete
+                  </label>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <DeleteModal product={product} refetch={refetch} />
     </div>
   );
 };
