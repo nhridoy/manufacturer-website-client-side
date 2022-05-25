@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import interceptors from "../../utils/interceptors";
 import { PaymentElement } from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ order, price }) => {
   const stripe = useStripe();
@@ -11,6 +12,7 @@ const CheckoutForm = ({ order, price }) => {
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     interceptors
@@ -53,6 +55,25 @@ const CheckoutForm = ({ order, price }) => {
           },
         },
       });
+
+    if (intentError) {
+      setCardError(intentError?.message);
+      setProcessing(false);
+    } else {
+      setCardError("");
+      setTransactionId(paymentIntent.id);
+      console.log(paymentIntent);
+      setSuccess("Congrats! Your payment is completed.");
+
+      //store payment on database
+      const payment = {
+        transactionId: paymentIntent.id,
+      };
+      interceptors.patch(`orders/${order._id}`, payment).then((res) => {
+        setProcessing(false);
+        navigate("/dashboard/myorders");
+      });
+    }
   };
   return (
     <>

@@ -3,7 +3,7 @@ import { signOut } from "firebase/auth";
 import auth from "../firebase.init";
 
 const interceptors = axios.create({
-  baseURL: "https://toolkit-hridoy.herokuapp.com",
+  baseURL: "http://localhost:5000",
 });
 
 // Add a request interceptor
