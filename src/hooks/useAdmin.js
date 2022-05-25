@@ -14,7 +14,7 @@ const useAdmin = (user) => {
   const { data: admin, isLoading: adminLoading } = useQuery(
     ["checkAdmin", email],
     () => {
-      return axios.get("http://localhost:5000/user/admin", {
+      return axios.get("https://toolkit-hridoy.herokuapp.com/user/admin", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
