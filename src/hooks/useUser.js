@@ -4,7 +4,6 @@ import interceptors from "../utils/interceptors";
 const useUser = (user) => {
   const [token, setToken] = React.useState("");
   React.useEffect(() => {
-    console.log(user);
     if (user) {
       interceptors
         .put("/user", {
@@ -12,8 +11,8 @@ const useUser = (user) => {
           email: user?.email,
         })
         .then((res) => {
-          // setToken(res.data.token);
-          console.log(res);
+          setToken(res.data.token);
+          // console.log(res);
         });
     }
   }, [user]);

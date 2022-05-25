@@ -27,6 +27,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import Payment from "./pages/Payment/Payment";
+import RequireAdmin from "./components/RequireAdmin/RequireAdmin";
 
 function App() {
   return (
@@ -54,7 +55,14 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<SingleBlog />} />
-        <Route path="/dashboard" element={<SideBar />}>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <SideBar />
+            </RequireAuth>
+          }
+        >
           <Route index element={<Dashboard />} />
           <Route
             path="myorders"
@@ -72,12 +80,54 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="allorders" element={<AllOrders />} />
-          <Route path="addproducts" element={<AddProducts />} />
-          <Route path="allproducts" element={<AllProducts />} />
-          <Route path="members" element={<Members />} />
-          <Route path="blogs" element={<AdminBlogs />} />
-          <Route path="blogs/new" element={<NewBlog />} />
+          <Route
+            path="allorders"
+            element={
+              <RequireAdmin>
+                <AllOrders />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="addproducts"
+            element={
+              <RequireAdmin>
+                <AddProducts />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="allproducts"
+            element={
+              <RequireAdmin>
+                <AllProducts />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="members"
+            element={
+              <RequireAdmin>
+                <Members />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="blogs"
+            element={
+              <RequireAdmin>
+                <AdminBlogs />
+              </RequireAdmin>
+            }
+          />
+          <Route
+            path="blogs/new"
+            element={
+              <RequireAdmin>
+                <NewBlog />
+              </RequireAdmin>
+            }
+          />
         </Route>
         <Route
           path="/myprofile"

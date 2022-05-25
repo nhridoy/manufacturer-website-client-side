@@ -1,7 +1,20 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, Outlet } from "react-router-dom";
+import auth from "../../firebase.init";
+import useAdmin from "../../hooks/useAdmin";
 
 const SideBar = () => {
+  const [user] = useAuthState(auth);
+  const [admin, adminLoading] = useAdmin(user);
+  React.useEffect(() => {
+    console.log(admin, adminLoading);
+  }, [admin, adminLoading]);
+
+  if (adminLoading) {
+    return <p>sidebar Loading....</p>;
+  }
+
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -14,27 +27,34 @@ const SideBar = () => {
           <li>
             <Link to="/dashboard">Dashboards</Link>
           </li>
-          <li>
-            <Link to="myorders">My Orders</Link>
-          </li>
-          <li>
-            <Link to="addreview">Add Review</Link>
-          </li>
-          <li>
-            <Link to="allorders">All Orders</Link>
-          </li>
-          <li>
-            <Link to="addproducts">Add Products</Link>
-          </li>
-          <li>
-            <Link to="allproducts">All Products</Link>
-          </li>
-          <li>
-            <Link to="members">Members</Link>
-          </li>
-          <li>
-            <Link to="blogs">Blogs</Link>
-          </li>
+          {admin ? (
+            <>
+              <li>
+                <Link to="allorders">All Orders</Link>
+              </li>
+              <li>
+                <Link to="addproducts">Add Products</Link>
+              </li>
+              <li>
+                <Link to="allproducts">All Products</Link>
+              </li>
+              <li>
+                <Link to="members">Members</Link>
+              </li>
+              <li>
+                <Link to="blogs">Blogs</Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="myorders">My Orders</Link>
+              </li>
+              <li>
+                <Link to="addreview">Add Review</Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
