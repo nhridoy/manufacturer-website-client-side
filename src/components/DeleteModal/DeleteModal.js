@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import interceptors from "../../utils/interceptors";
 
 const DeleteModal = ({ product, blog, refetch }) => {
@@ -6,10 +7,12 @@ const DeleteModal = ({ product, blog, refetch }) => {
     if (product) {
       interceptors.delete(`/products/${product._id}`).then((res) => {
         refetch();
+        toast.success("Product deleted successfully");
       });
     } else if (blog) {
       interceptors.delete(`/blogs/${blog._id}`).then((res) => {
         refetch();
+        toast.success("Blog deleted successfully");
       });
     }
   };

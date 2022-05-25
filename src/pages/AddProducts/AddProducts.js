@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import interceptors from "../../utils/interceptors";
 
 const AddProducts = () => {
@@ -26,9 +27,9 @@ const AddProducts = () => {
           })
           .then((res) => {
             reset();
+            toast.success("Product added successfully");
           });
       });
-    console.log(data);
   };
   return (
     <div className="container mx-auto px-4">

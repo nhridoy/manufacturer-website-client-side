@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import interceptors from "../../utils/interceptors";
 
 const NewBlog = () => {
@@ -27,6 +28,7 @@ const NewBlog = () => {
           })
           .then((res) => {
             reset();
+            toast.success("Blog added successfully");
           });
       });
   };
