@@ -1,45 +1,80 @@
+import axios from "axios";
 import React from "react";
+import { useForm } from "react-hook-form";
+import interceptors from "../../utils/interceptors";
 
 const NewBlog = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const onSubmit = (data) => {
+    axios
+      .postForm(
+        "https://api.imgbb.com/1/upload?key=d86d757a8d2a74357b53b53626040470",
+        {
+          image: data.image[0],
+        }
+      )
+      .then((res) => {
+        interceptors
+          .post("/blogs", {
+            ...data,
+            image: res.data.data.image.url,
+          })
+          .then((res) => {
+            reset();
+          });
+      });
+  };
   return (
     <div className="container mx-auto px-4">
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Title?</span>
+            <span className="label-text">Title</span>
           </label>
           <input
             type="text"
             placeholder="Type here"
             className="input input-bordered w-full"
+            {...register("title", { required: true })}
           />
-          <label className="label">
-            <span className="label-text-alt">Alt label</span>
-          </label>
+          {errors.title && (
+            <span className="text-red-600">This field is required</span>
+          )}
         </div>
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Image?</span>
+            <span className="label-text">Image</span>
           </label>
-          <input type="file" className="input input-bordered w-full" />
-          <label className="label">
-            <span className="label-text-alt">Alt label</span>
-          </label>
+          <input
+            type="file"
+            className="input input-bordered w-full"
+            {...register("image", { required: true })}
+          />
+          {errors.image && (
+            <span className="text-red-600">This field is required</span>
+          )}
         </div>
         <div className="form-control w-full">
           <label className="label">
-            <span className="label-text">Title?</span>
+            <span className="label-text">Details</span>
           </label>
           <textarea
             className="textarea textarea-bordered h-24"
-            placeholder="Bio"
+            placeholder="details"
+            {...register("details", { required: true })}
           ></textarea>
-          <label className="label">
-            <span className="label-text-alt">Alt label</span>
-          </label>
+
+          {errors.details && (
+            <span className="text-red-600">This field is required</span>
+          )}
         </div>
         <div className="form-control w-full">
-          <button className="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             <span className="btn-text">Submit</span>
           </button>
         </div>
