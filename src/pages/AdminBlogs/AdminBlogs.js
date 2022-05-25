@@ -1,8 +1,15 @@
 import React from "react";
+import { useQuery } from "react-query";
 import { Link, Outlet } from "react-router-dom";
+import interceptors from "../../utils/interceptors";
 
 const AdminBlogs = () => {
   const path = window.location.pathname.split("/");
+  const {
+    data: blogs,
+    isLoading,
+    refetch,
+  } = useQuery("blogs", () => interceptors.get("/blogs"));
 
   return (
     <div>
@@ -16,31 +23,32 @@ const AdminBlogs = () => {
         <table className="table table-bordered w-full text-center">
           <thead>
             <tr>
+              <th>No</th>
+              <th>Image</th>
               <th>Title</th>
-              <th>Author</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Blog 1</td>
-              <td>Author 1</td>
-              <td>2020-01-01</td>
-              <td>
-                <button className="btn btn-primary">Edit</button>
-                <button className="btn btn-primary">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <td>Blog 2</td>
-              <td>Author 2</td>
-              <td>2020-01-01</td>
-              <td>
-                <button className="btn btn-primary">Edit</button>
-                <button className="btn btn-primary">Delete</button>
-              </td>
-            </tr>
+            {blogs?.data?.map((blog, index) => (
+              <tr key={blog._id}>
+                <td>{index + 1}</td>
+                <td>
+                  <div className="avatar">
+                    <div className="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                      <img src={blog?.image} alt={blog?.title} />
+                    </div>
+                  </div>
+                </td>
+                <td>{blog?.title}</td>
+                <td>{blog?.date}</td>
+                <td>
+                  <button className="btn btn-primary">Edit</button>
+                  <button className="btn btn-primary">Delete</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

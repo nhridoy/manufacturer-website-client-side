@@ -23,6 +23,7 @@ const NewBlog = () => {
           .post("/blogs", {
             ...data,
             image: res.data.data.image.url,
+            date: new Date().toLocaleDateString(),
           })
           .then((res) => {
             reset();
