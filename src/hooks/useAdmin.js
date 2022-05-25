@@ -38,7 +38,7 @@ const useAdmin = (user) => {
     //   });
   }
   //   }, [user]);
-  return [admin.data, adminLoading];
+  return [admin?.data, adminLoading];
 };
 
 export default useAdmin;
