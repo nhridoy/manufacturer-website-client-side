@@ -1,10 +1,12 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { Link, Outlet } from "react-router-dom";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import interceptors from "../../utils/interceptors";
 
 const AdminBlogs = () => {
   const path = window.location.pathname.split("/");
+  const [blog, setBlog] = React.useState(null);
   const {
     data: blogs,
     isLoading,
@@ -44,14 +46,20 @@ const AdminBlogs = () => {
                 <td>{blog?.title}</td>
                 <td>{blog?.date}</td>
                 <td>
-                  <button className="btn btn-primary">Edit</button>
-                  <button className="btn btn-primary">Delete</button>
+                  <label
+                    htmlFor="delete-modal"
+                    onClick={() => setBlog(blog)}
+                    className="btn btn-primary modal-button"
+                  >
+                    Delete
+                  </label>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <DeleteModal blog={blog} refetch={refetch} />
     </div>
   );
 };
