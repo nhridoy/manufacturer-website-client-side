@@ -18,7 +18,10 @@ const Purchase = () => {
   } = useForm();
   const onSubmit = (data) => {
     interceptors
-      .post("/purchase", data)
+      .post("/purchase", {
+        ...data,
+        item: product?.name,
+      })
       .then((res) => {
         toast.success("Product added successfully");
         reset();
