@@ -96,6 +96,17 @@ const AddProducts = () => {
             <span className="text-red-600">This field is required</span>
           )}
         </div>
+        <div className="form-control">
+          <label htmlFor="">Minimum Quantity</label>
+          <input
+            type="number"
+            className="input input-bordered"
+            {...register("minimum", { required: true })}
+          />
+          {errors.minimum && (
+            <span className="text-red-600">This field is required</span>
+          )}
+        </div>
 
         <button type="submit" className="btn btn-primary">
           Add Product
