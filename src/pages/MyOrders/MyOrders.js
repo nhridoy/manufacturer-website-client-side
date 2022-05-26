@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import DeleteModal from "../../components/DeleteModal/DeleteModal";
 import interceptors from "../../utils/interceptors";
 
@@ -40,7 +41,12 @@ const MyOrders = () => {
                 <td>
                   {order?.paid || (
                     <>
-                      <button className="btn btn-success btn-sm">Pay</button>
+                      <Link
+                        to={`/payment/${order?._id}`}
+                        className="btn btn-success btn-sm"
+                      >
+                        Pay
+                      </Link>
                       <label
                         onClick={() => setOrder(order)}
                         htmlFor="delete-modal"
