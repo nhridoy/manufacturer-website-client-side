@@ -15,6 +15,7 @@ const Purchase = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm();
   const onSubmit = (data) => {
     interceptors
@@ -34,6 +35,7 @@ const Purchase = () => {
   React.useEffect(() => {
     interceptors.get(`/products/${id}`).then((res) => {
       setProduct(res.data);
+      setValue("quantity", parseInt(res.data.minimum));
     });
   }, []);
 

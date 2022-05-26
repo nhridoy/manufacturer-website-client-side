@@ -1,6 +1,17 @@
 import React from "react";
+import { useQuery } from "react-query";
+import DeleteModal from "../../components/DeleteModal/DeleteModal";
+import interceptors from "../../utils/interceptors";
 
 const MyOrders = () => {
+  const [order, setOrder] = React.useState(null);
+  const { data, isLoading, isError, isSuccess, refetch } = useQuery(
+    "orders",
+    () => interceptors.get("orders/me")
+  );
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -11,31 +22,41 @@ const MyOrders = () => {
           <thead>
             <tr>
               <th>No</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Available</th>
-              <th>Actions</th>
+              <th>Item</th>
+              <th>Order ID</th>
+              <th>User</th>
+              <th>Quantity</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div className="avatar">
-                  <div className="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src="https://api.lorem.space/image/face?hash=3174" />
-                  </div>
-                </div>
-              </td>
-              <td>Name</td>
-              <td>5000</td>
-              <td>
-                <button className="btn btn-primary btn-success">Pay</button>
-              </td>
-            </tr>
+            {data?.data?.map((order, index) => (
+              <tr key={order._id}>
+                <td>{index + 1}</td>
+                <td>{order?.item}</td>
+                <td>{order?._id}</td>
+                <td>{order?.name}</td>
+                <td>{order?.quantity}</td>
+                <td>
+                  {order?.paid || (
+                    <>
+                      <button className="btn btn-success btn-sm">Pay</button>
+                      <label
+                        onClick={() => setOrder(order)}
+                        htmlFor="delete-modal"
+                        className="btn btn-error btn-sm modal-button"
+                      >
+                        Cancel
+                      </label>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
+      <DeleteModal order={order} refetch={refetch} />
     </div>
   );
 };
